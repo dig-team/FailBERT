@@ -1,3 +1,4 @@
+from typing import Tuple
 import torch
 from torch.utils.data import Dataset
 from transformers import RobertaTokenizer
@@ -18,7 +19,7 @@ class CustomDataset(Dataset):
         )
         self.tokenizer = tokenizer.from_pretrained("roberta-base")
 
-    def preprocess(self, passage: str, label: str):
+    def preprocess(self, passage: str, label: str) -> Tuple[str, RobertaTokenizer, torch.Tensor, torch.Tensor]:
         new_passage = passage.strip() + " </s>"
         len_new_passage = len(self.tokenizer.encode(new_passage)) - 1
         if len_new_passage < 512:
