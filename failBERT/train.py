@@ -14,27 +14,28 @@ from failBERT.dataloader import CustomDataset
 def train_model(
     path_train: str,
     path_val: Optional[str],
-    passage_column: str,
-    label_column: str,
+    passages_column: str,
+    labels_column: str,
     path_save_model: str,
     epochs: int,
     device: str,
 ):
-    """[summary]
+    """
+    Train a RoBERTa model on a training dataset and save the best RoBERTa model based on a validation dataset
 
-    :param path_train: [description]
+    :param path_train: Path of the training dataset
     :type path_train: str
-    :param path_val: [description]
+    :param path_val: Path of te validation dataset
     :type path_val: Optional[str]
-    :param passage_column: [description]
+    :param passage_column: Passage column name
     :type passage_column: str
-    :param label_column: [description]
+    :param label_column: Label column name
     :type label_column: str
-    :param path_save_model: [description]
+    :param path_save_model: Path to save the best model
     :type path_save_model: str
-    :param epochs: [description]
+    :param epochs: Number of epochs
     :type epochs: int
-    :param device: [description]
+    :param device: Device to run a model [GPU/CPU]
     :type device: str
     """
 
@@ -43,7 +44,7 @@ def train_model(
     model.to(device)
 
     if path_val is None:
-        dataset = CustomDataset(path_train, passage_column, label_column)
+        dataset = CustomDataset(path_train, passages_column, labels_column)
 
         cnt_dataset = len(dataset)
         cnt_train_dataset = int(0.8 * cnt_dataset)
@@ -57,8 +58,8 @@ def train_model(
             dataset, (cnt_train_dataset, cnt_val_dataset)
         )
     else:
-        train_dataset = CustomDataset(path_train, passage_column, label_column)
-        val_dataset = CustomDataset(path_val, passage_column, label_column)
+        train_dataset = CustomDataset(path_train, passages_column, labels_column)
+        val_dataset = CustomDataset(path_val, passages_column, labels_column)
 
     train_dataloader = DataLoader(train_dataset, batch_size=8, shuffle=True)
     val_dataloader = DataLoader(val_dataset, batch_size=32, shuffle=False)

@@ -9,19 +9,24 @@ from failBERT.dataloader import CustomDataset
 
 
 def eval_model(
-    path_test: str, passage_column: str, label_column: str, path_model: str, device: str
+    path_test: str,
+    passages_column: str,
+    labels_column: str,
+    path_model: str,
+    device: str,
 ):
-    """[summary]
+    """
+    Evaluate a saved RoBERTa model on a testing dataset
 
-    :param path_test: [description]
+    :param path_test: Path of a testing dataset
     :type path_test: str
-    :param passage_column: [description]
+    :param passage_column: Passage column name
     :type passage_column: str
-    :param label_column: [description]
+    :param label_column: Label column name
     :type label_column: str
-    :param path_model: [description]
+    :param path_model: Path of the saved model
     :type path_model: str
-    :param device: [description]
+    :param device: Device to run a model [GPU/CPU]
     :type device: str
     """
 
@@ -29,7 +34,7 @@ def eval_model(
 
     best_model.to(device)
 
-    test_dataset = CustomDataset(path_test, passage_column, label_column)
+    test_dataset = CustomDataset(path_test, passages_column, labels_column)
     test_dataloader = DataLoader(test_dataset, batch_size=32)
 
     best_model.eval()

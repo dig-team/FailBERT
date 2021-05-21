@@ -14,13 +14,12 @@ class CustomDataset(Dataset):
         passages_column: str,
         labels_column: str,
     ):
-        """[summary]
-
-        :param data_path: [description]
+        """
+        :param data_path: Path of a dataset
         :type data_path: str
-        :param passages_column: [description]
+        :param passages_column: Passages column name
         :type passages_column: str
-        :param labels_column: [description]
+        :param labels_column: Labels column name
         :type labels_column: str
         """
         self.passages, self.labels = read_data(
@@ -31,13 +30,14 @@ class CustomDataset(Dataset):
     def preprocess(
         self, passage: str, label: str
     ) -> Tuple[str, RobertaTokenizer, torch.Tensor, torch.Tensor]:
-        """[summary]
+        """
+        Preprocess a passage
 
-        :param passage: [description]
+        :param passage: Passage
         :type passage: str
-        :param label: [description]
+        :param label: Label
         :type label: str
-        :return: [description]
+        :return: Passage with its preprocessed passage, its attention mask, and its label
         :rtype: Tuple[str, RobertaTokenizer, torch.Tensor, torch.Tensor]
         """
         new_passage = passage.strip() + " </s>"
@@ -60,20 +60,20 @@ class CustomDataset(Dataset):
             torch.tensor(new_label).unsqueeze(0),
         )
 
-    def __len__(self):
-        """[summary]
-
-        :return: [description]
-        :rtype: [type]
+    def __len__(self) -> int:
+        """
+        :return: Length of the dataset
+        :rtype: int
         """
         return len(self.labels)
 
-    def __getitem__(self, index: int):
-        """[summary]
-
-        :param index: [description]
+    def __getitem__(
+        self, index: int
+    ) -> Tuple[str, RobertaTokenizer, torch.Tensor, torch.Tensor]:
+        """
+        :param index: Index of an instance in the dataset
         :type index: int
-        :return: [description]
-        :rtype: [type]
+        :return:  Passage with its preprocessed passage, its attention mask, and its label
+        :rtype: Tuple[str, RobertaTokenizer, torch.Tensor, torch.Tensor]
         """
         return self.preprocess(self.passages[index], self.labels[index])
