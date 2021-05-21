@@ -1,4 +1,5 @@
 from statistics import mean
+from typing import Optional
 
 import torch
 import torch.optim as optim
@@ -10,9 +11,9 @@ from transformers import RobertaForSequenceClassification
 from failBERT.dataloader import CustomDataset
 
 
-def train(
+def train_model(
     path_train: str,
-    path_val: str,
+    path_val: Optional[str],
     passage_column: str,
     label_column: str,
     path_save_model: str,
@@ -24,13 +25,13 @@ def train(
     :param path_train: [description]
     :type path_train: str
     :param path_val: [description]
-    :type path_val: str
+    :type path_val: Optional[str]
     :param passage_column: [description]
     :type passage_column: str
     :param label_column: [description]
     :type label_column: str
-    :param path_saved_model: [description]
-    :type path_saved_model: str
+    :param path_save_model: [description]
+    :type path_save_model: str
     :param epochs: [description]
     :type epochs: int
     :param device: [description]
@@ -41,8 +42,23 @@ def train(
 
     model.to(device)
 
-    train_dataset = CustomDataset(path_train, passage_column, label_column)
-    val_dataset = CustomDataset(path_val, passage_column, label_column)
+    if path_val is None:
+        dataset = CustomDataset(path_train, passage_column, label_column)
+
+        cnt_dataset = len(dataset)
+        cnt_train_dataset = int(0.8 * cnt_dataset)
+
+        if cnt_dataset % 2 == 0:
+            cnt_val_dataset = int(0.2 * cnt_dataset)
+        else:
+            cnt_val_dataset = int(0.2 * cnt_dataset) + 1
+
+        train_dataset, val_dataset = torch.utils.data.random_split(
+            dataset, (cnt_train_dataset, cnt_val_dataset)
+        )
+    else:
+        train_dataset = CustomDataset(path_train, passage_column, label_column)
+        val_dataset = CustomDataset(path_val, passage_column, label_column)
 
     train_dataloader = DataLoader(train_dataset, batch_size=8, shuffle=True)
     val_dataloader = DataLoader(val_dataset, batch_size=32, shuffle=False)

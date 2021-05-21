@@ -1,6 +1,7 @@
 import click
-from failBERT.train import train as train_natural_dyck_2
-from failBERT.eval import eval as eval_natural_dyck_2
+
+from failBERT.eval import eval_model as eval_model_natural_dyck_2
+from failBERT.train import train_model as train_model_natural_dyck_2
 
 
 @click.group()
@@ -11,19 +12,15 @@ def cli():
 @click.command()
 @click.option(
     "--path_train",
-    default="data/natural_dyck_2_datasets/natural_dyck_2_train.csv",
+    default="data/natural_dyck_2/natural_dyck_2_train.csv",
 )
-@click.option(
-    "--path_val", default="data/natural_dyck_2_datasets/natural_dyck_2_val.csv"
-)
+@click.option("--path_val", default="data/natural_dyck_2/natural_dyck_2_val.csv")
 @click.option("--passage_column", default="modified_sentence")
 @click.option("--label_column", default="label")
-@click.option(
-    "--path_save_model", default="models/best_model_natural_dyck_2.pkl"
-)
+@click.option("--path_save_model", default="models/best_model_natural_dyck_2.pkl")
 @click.option("--epochs", default=10)
 @click.option("--device", default="cpu")
-def run(
+def train_model(
     path_train: str,
     path_val: str,
     passage_column: str,
@@ -32,7 +29,7 @@ def run(
     epochs: int,
     device: str,
 ):
-    train_natural_dyck_2(
+    train_model_natural_dyck_2(
         path_train,
         path_val,
         passage_column,
@@ -43,7 +40,33 @@ def run(
     )
 
 
-cli.add_command(run)
+@click.command()
+@click.option(
+    "--path_test",
+    default="data/natural_dyck_2/natural_dyck_2_test.csv",
+)
+@click.option("--passage_column", default="modified_sentence")
+@click.option("--label_column", default="label")
+@click.option("--path_model", default="models/best_model_natural_dyck_2.pkl")
+@click.option("--device", default="cpu")
+def eval_model(
+    path_test: str,
+    passage_column: str,
+    label_column: str,
+    path_model: str,
+    device: str,
+):
+    eval_model_natural_dyck_2(
+        path_test,
+        passage_column,
+        label_column,
+        path_model,
+        device,
+    )
+
+
+cli.add_command(train_model)
+cli.add_command(eval_model)
 
 if __name__ == "__main__":
     cli()

@@ -8,7 +8,7 @@ from tqdm import tqdm
 from failBERT.dataloader import CustomDataset
 
 
-def eval(
+def eval_model(
     path_test: str, passage_column: str, label_column: str, path_model: str, device: str
 ):
     """[summary]
