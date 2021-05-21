@@ -8,7 +8,7 @@ def read_data(
     data_path: str, passages_column: str, labels_column: str
 ) -> Tuple[np.ndarray, np.ndarray]:
     """
-    Read dataset by specifying the passages and the labels columns
+    Read a dataset by specifying the passages and the labels columns
 
     :param data_path: Path of a dataset
     :type data_path: str
