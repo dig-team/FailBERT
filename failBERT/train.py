@@ -1,3 +1,13 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+__author__ = Chadi Helwe
+__version__ = 1.0
+__maintainer__ = Chadi Helwe
+__email__ = chadi.helwe@telecom-paris.fr
+__description__ = Module to train a RoBERTa model
+"""
+
 from statistics import mean
 from typing import Optional
 
