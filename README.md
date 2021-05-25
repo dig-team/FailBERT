@@ -40,4 +40,3 @@ python run_natural_parity.py train-model
 ```bash
 python run_natural_parity.py test-model
 ```
-

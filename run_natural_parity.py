@@ -1,3 +1,13 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+__author__ = Chadi Helwe
+__version__ = 1.0
+__maintainer__ = Chadi Helwe
+__email__ = chadi.helwe@telecom-paris.fr
+__description__ = CLI to run the natural parity experiment
+"""
+
 from typing import Optional
 
 import click

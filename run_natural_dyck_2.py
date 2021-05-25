@@ -1,3 +1,13 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+__author__ = Chadi Helwe
+__version__ = 1.0
+__maintainer__ = Chadi Helwe
+__email__ = chadi.helwe@telecom-paris.fr
+__description__ = CLI to run the natural dyck-2 experiment
+"""
+
 import click
 
 from failBERT.eval import eval_model as eval_model_natural_dyck_2
