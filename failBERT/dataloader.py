@@ -14,26 +14,26 @@ import torch
 from torch.utils.data import Dataset
 from transformers import RobertaTokenizer
 
-from failBERT.utils import read_data
+from failBERT.utils import read_dataset
 
 
 class CustomDataset(Dataset):
     def __init__(
         self,
-        data_path: str,
+        path_dataset: str,
         passages_column: str,
         labels_column: str,
     ):
         """
-        :param data_path: Path of a dataset
-        :type data_path: str
+        :param path_dataset: Path of a dataset
+        :type path_dataset: str
         :param passages_column: Passages column name
         :type passages_column: str
         :param labels_column: Labels column name
         :type labels_column: str
         """
-        self.passages, self.labels = read_data(
-            data_path, passages_column, labels_column
+        self.passages, self.labels = read_dataset(
+            path_dataset, passages_column, labels_column
         )
         self.tokenizer = RobertaTokenizer.from_pretrained("roberta-base")
 

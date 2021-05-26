@@ -10,7 +10,7 @@ __description__ = Module to create the dataset of natural dyck-2 task
 
 import csv
 import random
-from typing import Optional, Tuple, List
+from typing import List, Optional, Tuple
 
 
 def convert_dyck_to_natural_instance(dyck_2: str) -> Tuple[List[str], List[str]]:
@@ -20,8 +20,8 @@ def convert_dyck_to_natural_instance(dyck_2: str) -> Tuple[List[str], List[str]]
     :type dyck_2: str
     :return: [description]
     :rtype: Tuple[List[str], List[str]]
-    """    
-    
+    """
+
     symbols_to_instance = {
         "[": "I added a peanut layer to my cake",
         "(": "I added a chocolate layer to my cake",
@@ -87,7 +87,7 @@ def to_str(list_str_dyck: List[str]) -> str:
     :type list_str_dyck: List[str]
     :return: [description]
     :rtype: str
-    """    
+    """
 
     str_dyck = " , ".join(list_str_dyck[:-1])
     str_dyck += f" and {list_str_dyck[-1]} ."
@@ -101,7 +101,7 @@ def create_dataset(path_dyck_2_dataset: str, path_natural_dyck_2_dataset: str) -
     :type path_dyck_2_dataset: str
     :param path_natural_dyck_2_dataset: [description]
     :type path_natural_dyck_2_dataset: str
-    """    
+    """
 
     with open(path_natural_dyck_2_dataset, "w") as dataset:
         dataset_writer = csv.writer(dataset)

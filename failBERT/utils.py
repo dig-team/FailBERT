@@ -8,14 +8,17 @@ __email__ = chadi.helwe@telecom-paris.fr
 __description__ = Utilities methods used by other modules
 """
 
+import csv
+from collections import Counter
 from typing import Tuple
 
 import numpy as np
 import pandas as pd
+from sklearn.model_selection import train_test_split
 
 
-def read_data(
-    data_path: str, passages_column: str, labels_column: str
+def read_dataset(
+    path_dataset: str, passages_column: str, labels_column: str
 ) -> Tuple[np.ndarray, np.ndarray]:
     """
     Read a dataset by specifying the passages and the labels columns
@@ -29,7 +32,145 @@ def read_data(
     :return: Passages and labels
     :rtype: Tuple[np.ndarray, np.ndarray]
     """
-    data = pd.read_csv(data_path)
+
+    data = pd.read_csv(path_dataset)
     passages = data[passages_column].values
     labels = data[labels_column].values
     return passages, labels
+
+
+def split_dataset(
+    path_dataset: str,
+    path_train: str,
+    path_val: str,
+    path_test: str,
+    passages_column: str,
+    labels_column: str,
+    upsample: bool = False,
+) -> None:
+    """[summary]
+
+    :param path_dataset: [description]
+    :type path_dataset: str
+    :param path_train: [description]
+    :type path_train: str
+    :param path_val: [description]
+    :type path_val: str
+    :param path_test: [description]
+    :type path_test: str
+    :param passages_column: [description]
+    :type passages_column: str
+    :param labels_column: [description]
+    :type labels_column: str
+    :param upsample: [description], defaults to False
+    :type upsample: bool, optional
+    """
+
+    data = pd.read_csv(path_dataset)
+    data_train, data_temp, label_train, label_temp = train_test_split(
+        data[passages_column],
+        data[labels_column],
+        test_size=0.4,
+        stratify=data[labels_column],
+    )
+
+    data_val, data_test, label_val, label_test = train_test_split(
+        data_temp,
+        label_temp,
+        test_size=0.5,
+        stratify=label_temp,
+    )
+
+    with open(path_train, "w") as f:
+        cnt = Counter(label_train)
+        upsample_value = int(cnt[False] / cnt[True])
+        csv_train = csv.writer(f)
+        csv_train.writerow([passages_column, labels_column])
+        if upsample:
+            for i, l in zip(data_train, label_train):
+                if l:
+                    for _ in range(0, upsample_value):
+                        csv_train.writerow([i, l])
+                else:
+                    csv_train.writerow([i, l])
+        else:
+            for i, l in zip(data_train, label_train):
+                csv_train.writerow([i, l])
+
+    with open(path_val, "w") as f:
+        csv_val = csv.writer(f)
+        csv_val.writerow([passages_column, labels_column])
+
+        for i, l in zip(data_val, label_val):
+            csv_val.writerow([i, l])
+
+    with open(path_test, "w") as f:
+        csv_test = csv.writer(f)
+        csv_test.writerow([passages_column, labels_column])
+
+        for i, l in zip(data_test, label_test):
+            csv_test.writerow([i, l])
+
+
+def check_pattern_dataset(
+    path_dataset: str,
+    passages_column: str,
+    labels_column: str,
+    pattern: str,
+    label: bool,
+) -> None:
+    """[summary]
+
+    :param path_dataset: [description]
+    :type path_dataset: str
+    :param passages_column: [description]
+    :type passages_column: str
+    :param labels_column: [description]
+    :type labels_column: str
+    :param pattern: [description]
+    :type pattern: str
+    :param label: [description]
+    :type label: bool
+    """
+
+    data = pd.read_csv(path_dataset)
+    cnt_pattern_label = 0
+    for x, y in zip(data[passages_column], data[labels_column]):
+        if pattern in x and y == label:
+            cnt_pattern_label += 1
+    print(
+        f"Counts of passages with pattern {pattern} and label {label}: {cnt_pattern_label}"
+    )
+
+
+def create_equally_distributed_dataset(
+    path_dataset: str,
+    path_equally_distrbuted_dataset: str,
+    limit: bool = True,
+    nbr_instances: int = 10000,
+) -> None:
+    """[summary]
+
+    :param path_dataset: [description]
+    :type path_dataset: str
+    :param path_equally_distrbuted_dataset: [description]
+    :type path_equally_distrbuted_dataset: str
+    :param limit: [description], defaults to True
+    :type limit: bool, optional
+    :param nbr_instances: [description], defaults to 10000
+    :type nbr_instances: int, optional
+    """
+
+    data = pd.read_csv(path_dataset)
+    if limit:
+        x_true = data[data["label"] == True].sample(nbr_instances)
+        x_false = data[data["label"] == False].sample(nbr_instances)
+    else:
+        x_true = data[data["label"] == True]
+        x_false = data[data["label"] == False].sample(len(x_true))
+
+    x_true.reset_index(drop=True, inplace=True)
+    x_false.reset_index(drop=True, inplace=True)
+    new_data = pd.concat([x_true, x_false])
+
+    new_data.to_csv(f"{path_equally_distrbuted_dataset}")

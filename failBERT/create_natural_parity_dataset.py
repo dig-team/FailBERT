@@ -8,8 +8,8 @@ __email__ = chadi.helwe@telecom-paris.fr
 __description__ = Module to create the dataset of natural parity task
 """
 
-import itertools
 import csv
+import itertools
 import random
 
 
