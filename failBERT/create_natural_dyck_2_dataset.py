@@ -13,12 +13,13 @@ import random
 from typing import List, Optional, Tuple
 
 
-def convert_dyck_to_natural_instance(dyck_2: str) -> Tuple[List[str], List[str]]:
-    """[summary]
+def convert_dyck_2_to_natural_instance(dyck_2: str) -> Tuple[List[str], List[str]]:
+    """
+    Convert a dyck-2 instance to a natural dyck-2 instance
 
-    :param dyck_2: [description]
+    :param dyck_2: Dyck-2 instance
     :type dyck_2: str
-    :return: [description]
+    :return: List of dyck-2 natural tokens and list of dyck-2 symbols tokens
     :rtype: Tuple[List[str], List[str]]
     """
 
@@ -41,13 +42,14 @@ def convert_dyck_to_natural_instance(dyck_2: str) -> Tuple[List[str], List[str]]
 def convert_to_swapped_false_instance(
     list_str_dyck: List[str], list_str_dyck_symbols: List[str]
 ) -> Tuple[List[str], List[str], Optional[int], bool]:
-    """[summary]
+    """
+    Create a negative natural dyck-2 instance from a postive natural dyck-2 instance
 
-    :param list_str_dyck: [description]
+    :param list_str_dyck: List of dyck-2 natural tokens
     :type list_str_dyck: List[str]
-    :param list_str_dyck_symbols: [description]
+    :param list_str_dyck_symbols: List of dyck-2 symbols tokens
     :type list_str_dyck_symbols: List[str]
-    :return: [description]
+    :return: Negative list of natural dyck-2 token, negative list of dyck-2 symbols tokens, swapped index, and label of the instance
     :rtype: Tuple[List[str], List[str], Optional[int], bool]
     """
 
@@ -81,11 +83,12 @@ def convert_to_swapped_false_instance(
 
 
 def to_str(list_str_dyck: List[str]) -> str:
-    """[summary]
+    """
+    Convert a list of natural dyck-2 token to a string
 
-    :param list_str_dyck: [description]
+    :param list_str_dyck: List of dyck-2 natural tokens
     :type list_str_dyck: List[str]
-    :return: [description]
+    :return: Natural dyck-2 string
     :rtype: str
     """
 
@@ -95,11 +98,12 @@ def to_str(list_str_dyck: List[str]) -> str:
 
 
 def create_dataset(path_dyck_2_dataset: str, path_natural_dyck_2_dataset: str) -> None:
-    """[summary]
+    """
+    Create a natural dyck-2 dataset
 
-    :param path_dyck_2_dataset: [description]
+    :param path_dyck_2_dataset: Path of the dyck-2 dataset
     :type path_dyck_2_dataset: str
-    :param path_natural_dyck_2_dataset: [description]
+    :param path_natural_dyck_2_dataset: Path of the natural dyck-2 dataset
     :type path_natural_dyck_2_dataset: str
     """
 
@@ -117,9 +121,10 @@ def create_dataset(path_dyck_2_dataset: str, path_natural_dyck_2_dataset: str) -
         with open(path_dyck_2_dataset, "r") as f:
 
             for l in f.readlines():
-                list_str_dyck, list_str_dyck_symbols = convert_dyck_to_natural_instance(
-                    l.strip()
-                )
+                (
+                    list_str_dyck,
+                    list_str_dyck_symbols,
+                ) = convert_dyck_2_to_natural_instance(l.strip())
                 dataset_writer.writerow(
                     [
                         to_str(list_str_dyck),
