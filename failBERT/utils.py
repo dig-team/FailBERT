@@ -48,21 +48,22 @@ def split_dataset(
     labels_column: str,
     upsample: bool = False,
 ) -> None:
-    """[summary]
+    """
+    Split a dataset into training 60%, validation 20%, and testing 20% sets
 
-    :param path_dataset: [description]
+    :param path_dataset: Path of the dataset
     :type path_dataset: str
-    :param path_train: [description]
+    :param path_train: Path to save the training set
     :type path_train: str
-    :param path_val: [description]
+    :param path_val: Path to save the validation set
     :type path_val: str
-    :param path_test: [description]
+    :param path_test: Path to save the testing set
     :type path_test: str
-    :param passages_column: [description]
+    :param passages_column: Passages column name
     :type passages_column: str
-    :param labels_column: [description]
+    :param labels_column: Labels column name
     :type labels_column: str
-    :param upsample: [description], defaults to False
+    :param upsample: Upsample the training set for data augmentation, defaults to False
     :type upsample: bool, optional
     """
 
@@ -112,24 +113,25 @@ def split_dataset(
             csv_test.writerow([i, l])
 
 
-def check_pattern_dataset(
+def count_pattern_dataset(
     path_dataset: str,
     passages_column: str,
     labels_column: str,
     pattern: str,
     label: bool,
 ) -> None:
-    """[summary]
+    """
+    Count the number of instances with a specific pattern and a label
 
-    :param path_dataset: [description]
+    :param path_dataset: Path of the dataset
     :type path_dataset: str
-    :param passages_column: [description]
+    :param passages_column: Passages column name
     :type passages_column: str
-    :param labels_column: [description]
+    :param labels_column: Labels column name
     :type labels_column: str
-    :param pattern: [description]
+    :param pattern: Pattern to check in the passages
     :type pattern: str
-    :param label: [description]
+    :param label: Label associated with the searched pattern
     :type label: bool
     """
 
@@ -149,15 +151,16 @@ def create_equally_distributed_dataset(
     limit: bool = True,
     nbr_instances: int = 10000,
 ) -> None:
-    """[summary]
+    """
+    Create an equally ditributed dataset from an unequally distributed dataset 
 
-    :param path_dataset: [description]
+    :param path_dataset: Path of the dataset
     :type path_dataset: str
-    :param path_equally_distrbuted_dataset: [description]
+    :param path_equally_distrbuted_dataset: Path to save the equally distributed dataset
     :type path_equally_distrbuted_dataset: str
-    :param limit: [description], defaults to True
+    :param limit: If true the limitation is based on the next parameter. Otherwise, the limiation is based on the positive instances, defaults to True
     :type limit: bool, optional
-    :param nbr_instances: [description], defaults to 10000
+    :param nbr_instances: Number of postive and negative instances, defaults to 10000
     :type nbr_instances: int, optional
     """
 

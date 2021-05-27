@@ -34,7 +34,7 @@ def create_dataset(
     :type min_nbr_switch_operation: int
     :param max_nbr_switch_operation: Maximum number of switch operations
     :type max_nbr_switch_operation: int
-    :param random_sample: If true the instances will be created randomly. Otherwise, the instances will be created using permutations
+    :param random_sample: If true the instances are created randomly. Otherwise, the instances are created using permutations
     :type random_sample: bool
     """
 

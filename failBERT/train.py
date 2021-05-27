@@ -37,10 +37,10 @@ def train_model(
     :type path_train: str
     :param path_val: Path of te validation dataset
     :type path_val: Optional[str]
-    :param passage_column: Passage column name
-    :type passage_column: str
-    :param label_column: Label column name
-    :type label_column: str
+    :param passages_column: Passages column name
+    :type passages_column: str
+    :param labels_column: Labels column name
+    :type labels_column: str
     :param path_save_model: Path to save the best model
     :type path_save_model: str
     :param epochs: Number of epochs
