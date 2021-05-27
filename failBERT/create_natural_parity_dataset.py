@@ -15,24 +15,31 @@ import random
 
 def create_dataset(
     path_natural_parity_dataset: str,
-    min_range: int,
-    max_range: int,
+    min_range_length: int,
+    max_range_length: int,
+    min_nbr_switch_operation: int,
+    max_nbr_switch_operation: int,
     random_sample: bool,
 ) -> None:
-    """[summary]
+    """
+    Create a parity dataset
 
-    :param path_natural_parity_dataset: [description]
+    :param path_natural_parity_dataset: Path of the natural parity dataset
     :type path_natural_parity_dataset: str
-    :param min_range: [description]
-    :type min_range: int
-    :param max_range: [description]
-    :type max_range: int
-    :param random_sample: [description]
+    :param min_range_length: Minimum length of an instance
+    :type min_range_length: int
+    :param max_range_length: Maximum length of an instance
+    :type max_range_length: int
+    :param min_nbr_switch_operation: Minimum number of switch operations
+    :type min_nbr_switch_operation: int
+    :param max_nbr_switch_operation: Maximum number of switch operations
+    :type max_nbr_switch_operation: int
+    :param random_sample: If true the instances will be created randomly. Otherwise, the instances will be created using permutations
     :type random_sample: bool
     """
 
-    list_pizzas = ["I ate a pizza"] * max_range
-    list_switch = ["I operated the switch"] * max_range
+    list_pizzas = ["I ate a pizza"] * max_range_length
+    list_switch = ["I operated the switch"] * max_range_length
 
     list_pizza_switch = list_pizzas + list_switch
 
@@ -46,7 +53,7 @@ def create_dataset(
         dataset_writer.writerow(["modified_sentence", "label"])
         rows = []
 
-        for it in range(min_range, max_range + 1):
+        for it in range(min_range_length, max_range_length + 1):
             list_combination = []
             if random_sample:
                 for _ in range(COMBINATION_ELEMENTS):
@@ -58,7 +65,10 @@ def create_dataset(
 
             for i in set(list_combination):
                 cnt_switch = i.count("I operated the switch")
-                if cnt_switch >= 1 and cnt_switch <= 15:
+                if (
+                    cnt_switch >= min_nbr_switch_operation
+                    and cnt_switch <= max_nbr_switch_operation
+                ):
                     if cnt_switch % 2 != 0:
                         label = True
                     else:
@@ -81,7 +91,6 @@ def create_dataset(
                         sentence += " ."
                         rows.append(tuple([sentence, label]))
 
-        print(len(rows))
         for r in set(rows):
             dataset_writer.writerow(r)
             cnt += 1
@@ -89,5 +98,6 @@ def create_dataset(
             if r[1]:
                 cnt_true += 1
 
-    print(cnt)
-    print(cnt_true)
+    print(f"Total instances: {cnt}")
+    print(f"Positive instances: {cnt_true}")
+    print(f"Negative instances: {cnt - cnt_true}")
