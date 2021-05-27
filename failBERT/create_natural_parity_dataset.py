@@ -24,7 +24,7 @@ def create_dataset(
     """
     Create a parity dataset
 
-    :param path_natural_parity_dataset: Path of the natural parity dataset
+    :param path_natural_parity_dataset: Path to save the natural parity dataset
     :type path_natural_parity_dataset: str
     :param min_range_length: Minimum length of an instance
     :type min_range_length: int

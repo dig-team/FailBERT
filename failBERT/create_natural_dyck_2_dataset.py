@@ -103,7 +103,7 @@ def create_dataset(path_dyck_2_dataset: str, path_natural_dyck_2_dataset: str) -
 
     :param path_dyck_2_dataset: Path of the dyck-2 dataset
     :type path_dyck_2_dataset: str
-    :param path_natural_dyck_2_dataset: Path of the natural dyck-2 dataset
+    :param path_natural_dyck_2_dataset: Path to save the natural dyck-2 dataset
     :type path_natural_dyck_2_dataset: str
     """
 
