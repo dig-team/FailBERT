@@ -15,6 +15,24 @@ pip install -r requirements.txt
 
 ### Natural Dyck-2 Task
 
+#### Create Dataset
+
+```bash
+python run_natural_dyck_2_dataset.py create-natural-dyck-2-dataset
+```
+
+#### Balance Dataset
+
+```bash
+python run_utils.py create-equally-distributed-natural-dataset
+```
+
+#### Split Dataset
+
+```bash
+python run_utils.py split-natural-dataset
+```
+
 #### Training Model
 
 ```bash
@@ -28,6 +46,24 @@ python run_natural_dyck_2.py test-model
 ```
 
 ### Natural Parity Task
+
+#### Create Dataset
+
+```bash
+python run_natural_parity_dataset.py create-natural-parity-dataset
+```
+
+#### Balance Dataset
+
+```bash
+python run_utils.py create-equally-distributed-natural-dataset
+```
+
+#### Split Dataset
+
+```bash
+python run_utils.py split-natural-dataset
+```
 
 #### Training Model
 

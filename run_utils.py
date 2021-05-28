@@ -23,7 +23,7 @@ def cli():
 @click.option("--path_equally_distrbuted_dataset")
 @click.option("--limit", default=True)
 @click.option("--nbr_instances", default=10000)
-def create_equally_distributed_natural_dyck_2_dataset(
+def create_equally_distributed_natural_dataset(
     path_dataset: str,
     path_equally_distrbuted_dataset: str,
     limit: bool,
@@ -55,7 +55,7 @@ def create_equally_distributed_natural_dyck_2_dataset(
 @click.option("--passages_column", default="modified_sentence")
 @click.option("--labels_column", default="label")
 @click.option("--upsample", default=False)
-def split_natural_dyck_2_dataset(
+def split_natural_dataset(
     path_dataset: str,
     path_train: str,
     path_val: str,
