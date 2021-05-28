@@ -152,7 +152,7 @@ def create_equally_distributed_dataset(
     nbr_instances: int = 10000,
 ) -> None:
     """
-    Create an equally ditributed dataset from an unequally distributed dataset 
+    Create an equally ditributed dataset from an unequally distributed dataset
 
     :param path_dataset: Path of the dataset
     :type path_dataset: str
