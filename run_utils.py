@@ -94,8 +94,8 @@ def split_natural_dataset(
     )
 
 
-cli.add_command(create_equally_distributed_natural_dyck_2_dataset)
-cli.add_command(split_natural_dyck_2_dataset)
+cli.add_command(create_equally_distributed_natural_dataset)
+cli.add_command(split_natural_dataset)
 
 if __name__ == "__main__":
     cli()
