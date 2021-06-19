@@ -9,12 +9,15 @@ __description__ = Utilities methods used by other modules
 """
 
 import csv
+import os
 from collections import Counter
 from typing import Tuple
 
 import numpy as np
 import pandas as pd
+import requests
 from sklearn.model_selection import train_test_split
+from tqdm import tqdm
 
 
 def read_dataset(
@@ -177,3 +180,31 @@ def create_equally_distributed_dataset(
     new_data = pd.concat([x_true, x_false])
 
     new_data.to_csv(f"{path_equally_distrbuted_dataset}")
+
+
+def download_pretrained_models(url: str, file_name: str) -> None:
+    """
+    Download a pretrained model for the tasks
+
+    :param url: DropBox url of the pretrained model
+    :type url: str
+    :param file_name: Name of the pretrained model
+    :type file_name: str
+    """
+    if not os.path.isdir("models"):
+        os.mkdir("models")
+
+    if not os.path.exists(f"model/{file_name}"):
+        with requests.get(url, stream=True) as req:
+            total_size_in_bytes = int(req.headers.get("content-length", 0))
+            chunk_size = 1024
+            progress_bar = tqdm(
+                total=total_size_in_bytes,
+                unit_scale=True,
+                desc="Downloading Pretrained Model",
+            )
+            with open(f"models/{file_name}", "wb") as f:
+                for chunk in req.iter_content(chunk_size=chunk_size):
+                    progress_bar.update(len(chunk))
+                    f.write(chunk)
+            progress_bar.close()

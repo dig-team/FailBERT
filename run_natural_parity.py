@@ -14,6 +14,7 @@ import click
 
 from failBERT.eval import eval_model as eval_model_natural_parity
 from failBERT.train import train_model as train_model_natural_parity
+from failBERT.utils import download_pretrained_models
 
 
 @click.group()
@@ -72,6 +73,24 @@ def train_model(
 
 @click.command()
 @click.option(
+    "--url",
+    default="https://www.dropbox.com/s/c8ushxx3fow4yag/pizza_switch_best_model_1_15.pkl?dl=1",
+)
+@click.option("--file_name", default="best_model_natural_parity.pkl")
+def download_pretrained_model(url: str, file_name: str):
+    """
+    Command to download pretrained model for the natural parity task
+
+    :param url: DropBox url of the pretrained model
+    :type url: str
+    :param file_name: Name of the pretrained model
+    :type file_name: str
+    """
+    download_pretrained_models(url, file_name)
+
+
+@click.command()
+@click.option(
     "--path_test",
     default="data/natural_parity/natural_parity_test.csv",
 )
@@ -110,6 +129,7 @@ def eval_model(
 
 
 cli.add_command(train_model)
+cli.add_command(download_pretrained_model)
 cli.add_command(eval_model)
 
 if __name__ == "__main__":
