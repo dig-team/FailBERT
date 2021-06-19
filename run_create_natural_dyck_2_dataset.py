@@ -11,7 +11,6 @@ __description__ = CLI to create the natural dyck-2 dataset
 import click
 
 from failBERT.create_natural_dyck_2_dataset import create_dataset
-from failBERT.utils import create_equally_distributed_dataset, split_dataset
 
 
 @click.group()
