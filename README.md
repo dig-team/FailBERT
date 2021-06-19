@@ -33,7 +33,13 @@ python run_utils.py create-equally-distributed-natural-dataset
 python run_utils.py split-natural-dataset
 ```
 
-#### Training Model
+#### Download Pretrained Model
+
+```bash
+python run_natural_dyck_2.py download-pretrained-model
+```
+
+#### Training a New Model
 
 ```bash
 python run_natural_dyck_2.py train-model
@@ -65,7 +71,14 @@ python run_utils.py create-equally-distributed-natural-dataset
 python run_utils.py split-natural-dataset
 ```
 
-#### Training Model
+#### Download Pretrained Model
+
+```bash
+python run_natural_parity.py download-pretrained-model
+```
+
+
+#### Training a New Model
 
 ```bash
 python run_natural_parity.py train-model
