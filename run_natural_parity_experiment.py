@@ -63,7 +63,7 @@ def run_experiment(device: str) -> None:
     print("######################################################")
     natural_parity_dir = os.listdir(PATH_NATURAL_PARITY)
     for f in natural_parity_dir:
-        if "test" in f:
+        if ("test" and not "temp") in f:
             f1, accuracy, precision, recall = eval_model(
                 f"{PATH_NATURAL_PARITY}{f}",
                 "modified_sentence",
