@@ -40,7 +40,7 @@ def run_experiment(device: str) -> None:
     print("Creating datasets")
     print("######################################################")
     for i in range(1, 11):
-        print(f"Test Dataset {i} created")
+        print(f"Test dataset {i} created")
         path_temp_test_dataset = f"{PATH_NATURAL_PARITY}temp_test_{i}.csv"
         path_test_dataset = f"{PATH_NATURAL_PARITY}test_{i}.csv"
         create_dataset(
@@ -58,6 +58,7 @@ def run_experiment(device: str) -> None:
     precision_scores = []
     recall_scores = []
 
+    print("######################################################")
     print("Evalating the model")
     print("######################################################")
     natural_parity_dir = os.listdir(PATH_NATURAL_PARITY)

@@ -47,6 +47,7 @@ def run_experiment(device: str) -> None:
     precision_scores = []
     recall_scores = []
 
+    print("######################################################")
     print("Evalating the model")
     print("######################################################")
     natural_dyck_2_dir = os.listdir(PATH_NATURAL_DYCK_2)
