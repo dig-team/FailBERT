@@ -13,14 +13,17 @@ from statistics import mean
 
 from failBERT.create_natural_parity_dataset import create_dataset
 from failBERT.eval import eval_model
-from failBERT.utils import (create_equally_distributed_dataset,
-                            download_pretrained_models)
+from failBERT.utils import (
+    create_equally_distributed_dataset,
+    download_pretrained_models,
+)
 
 warnings.filterwarnings("ignore")
 
 
 def run_experiment(device: str) -> None:
-    """[summary]
+    """
+    Method to run the natural parity (light switch task) experiment in reported the paper
 
     :param device: Device to run a model [cpu/cuda]
     :type device: str
