@@ -9,9 +9,11 @@ __description__ = Module to test a RoBERTa model
 """
 
 from statistics import mean
+from typing import Tuple
 
 import torch
-from sklearn.metrics import accuracy_score, f1_score
+from sklearn.metrics import (accuracy_score, f1_score, precision_score,
+                             recall_score)
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
@@ -24,7 +26,7 @@ def eval_model(
     labels_column: str,
     path_model: str,
     device: str,
-):
+) -> Tuple[float, float, float, float]:
     """
     Evaluate a saved RoBERTa model on a testing dataset
 
@@ -36,8 +38,10 @@ def eval_model(
     :type label_column: str
     :param path_model: Path of the saved model
     :type path_model: str
-    :param device: Device to run a model [GPU/CPU]
+    :param device: Device to run a model [cpu/cuda]
     :type device: str
+    :return: Scores od F1-Score, Accuracy, Precision, Recall
+    :rtype: Tuple[float, float, float, float]
     """
 
     best_model = torch.load(path_model)
@@ -50,6 +54,8 @@ def eval_model(
     best_model.eval()
     test_f1_scores = []
     test_accuracy_scores = []
+    test_precision_scores = []
+    test_recall_scores = []
     all_y_pred = []
     all_y_true = []
 
@@ -71,9 +77,24 @@ def eval_model(
 
             test_f1_scores.append(f1_score(y_true, y_pred, average="micro"))
             test_accuracy_scores.append(accuracy_score(y_true, y_pred))
+            test_precision_scores.append(
+                precision_score(y_true, y_pred, average="micro")
+            )
+            test_recall_scores.append(recall_score(y_true, y_pred, average="micro"))
 
         avg_f1_scores = mean(test_f1_scores)
         avg_accuracy_scores = mean(test_accuracy_scores)
+        avg_precision_scores = mean(test_precision_scores)
+        avg_recall_scores = mean(test_recall_scores)
 
         print(f"Test F1 Score {avg_f1_scores}")
         print(f"Test Accuracy Score {avg_accuracy_scores}")
+        print(f"Test Precision Score {avg_precision_scores}")
+        print(f"Test Recall Score {avg_recall_scores}")
+
+        return (
+            avg_f1_scores,
+            avg_accuracy_scores,
+            avg_precision_scores,
+            avg_recall_scores,
+        )

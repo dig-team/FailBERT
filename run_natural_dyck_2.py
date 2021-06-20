@@ -55,7 +55,7 @@ def train_model(
     :type path_save_model: str
     :param epochs: Number of epochs
     :type epochs: int
-    :param device: Device to run a model [GPU/CPU]
+    :param device: Device to run a model [cpu/cuda]
     :type device: str
     """
     train_model_natural_dyck_2(
@@ -117,7 +117,7 @@ def eval_model(
     :param device: Device to run a model [GPU/CPU]
     :type device: str
     """
-    eval_model_natural_dyck_2(
+    _, _, _, _ = eval_model_natural_dyck_2(
         path_test,
         passages_column,
         labels_column,

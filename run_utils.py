@@ -20,12 +20,12 @@ def cli():
 
 @click.command()
 @click.option("--path_dataset")
-@click.option("--path_equally_distrbuted_dataset")
+@click.option("--path_equally_distributed_dataset")
 @click.option("--limit", default=True)
-@click.option("--nbr_instances", default=10000)
+@click.option("--nbr_instances", default=5000)
 def create_equally_distributed_natural_dataset(
     path_dataset: str,
-    path_equally_distrbuted_dataset: str,
+    path_equally_distributed_dataset: str,
     limit: bool,
     nbr_instances: int,
 ) -> None:
@@ -43,7 +43,7 @@ def create_equally_distributed_natural_dataset(
     """
 
     create_equally_distributed_dataset(
-        path_dataset, path_equally_distrbuted_dataset, limit, nbr_instances
+        path_dataset, path_equally_distributed_dataset, limit, nbr_instances
     )
 
 

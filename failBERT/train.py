@@ -45,7 +45,7 @@ def train_model(
     :type path_save_model: str
     :param epochs: Number of epochs
     :type epochs: int
-    :param device: Device to run a model [GPU/CPU]
+    :param device: Device to run a model [cpu/cuda]
     :type device: str
     """
 
@@ -134,12 +134,12 @@ def train_model(
             val_loss /= len(val_dataloader)
 
             if best_val_loss > val_loss:
-                print("###########################")
+                print("######################################################")
                 print("Best Model")
                 best_val_loss = val_loss
                 best_val_f1_score = mean(val_f1_scores)
                 torch.save(model, path_save_model)
-                print("###########################")
+                print("######################################################")
 
             print(f"Val loss {val_loss}")
             print(f"Val F1-Score {mean(val_f1_scores)}")
