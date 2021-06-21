@@ -32,7 +32,7 @@ python run_natural_parity_experiment.py
 
 #### Create Dataset
 ```bash
-python run_create_natural_dyck_2_dataset.py  create-natural-dyck-2-dataset  --path_dyck_2_dataset data/dyck_2/test_dataset_10.txt --path_natural_dyck_2_dataset data/natural_dyck_2/natural_dyck_2_test_10.csv
+python run_create_natural_dyck_2_dataset.py  create-natural-dyck-2-dataset  --path_dyck_2_dataset data/dyck_2/dyck_2_test_10.txt --path_natural_dyck_2_dataset data/natural_dyck_2/natural_dyck_2_test_10.csv
 ```
 
 #### Training a New Model or Download the Pretrained Model
@@ -60,33 +60,30 @@ python run_natural_dyck_2.py test-model
 #### Create Dataset
 
 ```bash
-python run_natural_parity_dataset.py create-natural-parity-dataset --path_natural_parity_dataset data/natural_parity/test1.csv --min_range_length 21--max_range_length 40
---min_nbr_switch_operation 16 --max_nbr_switch_operation 20 --random_sample True
+>python run_create_natural_parity_dataset.py create-natural-parity-dataset --path_natural_parity_dataset data/natural_parity/test1.csv --min_range_length 21 --max_range_length 40 --min_nbr_switch_operation 16 --max_nbr_switch_operation 20
 ```
 
 #### Balance Dataset
 
 ```bash
-python run_utils.py create-equally-distributed-natural-dataset --path_dataset data/natural_parity/test1.csv --path_equally_distributed_dataset data/natural_parity/test1.csv --limit True -- --nbr_instances 2500
+python run_utils.py create-equally-distributed-natural-dataset --path_dataset data/natural_parity/test1.csv --path_equally_distributed_dataset data/natural_parity/test1.csv --limit True --nbr_instances 2500
 ```
 
-#### Split Dataset
 
-```bash
-python run_utils.py split-natural-dataset
-```
-
-#### Download Pretrained Model
-
-```bash
-python run_natural_parity.py download-pretrained-model
-```
+#### Training a New Model or Download the Pretrained Model
 
 #### Training a New Model
 
 ```bash
 python run_natural_parity.py train-model
 ```
+#### Download the Pretrained Model
+
+```bash
+python run_natural_parity.py download-pretrained-model
+```
+
+
 
 #### Testing Model
 
