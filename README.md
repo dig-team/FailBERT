@@ -60,7 +60,7 @@ python run_natural_dyck_2.py test-model
 #### Create Dataset
 
 ```bash
->python run_create_natural_parity_dataset.py create-natural-parity-dataset --path_natural_parity_dataset data/natural_parity/test1.csv --min_range_length 21 --max_range_length 40 --min_nbr_switch_operation 16 --max_nbr_switch_operation 20
+python run_create_natural_parity_dataset.py create-natural-parity-dataset --path_natural_parity_dataset data/natural_parity/test1.csv --min_range_length 21 --max_range_length 40 --min_nbr_switch_operation 16 --max_nbr_switch_operation 20
 ```
 
 #### Balance Dataset
