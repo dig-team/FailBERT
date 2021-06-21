@@ -52,10 +52,10 @@ def create_natural_parity_dataset(
 
     create_dataset(
         path_natural_parity_dataset,
-        min_range_length,
-        max_range_length,
-        min_nbr_switch_operation,
-        max_nbr_switch_operation,
+        int(min_range_length),
+        int(max_range_length),
+        int(min_nbr_switch_operation),
+        int(max_nbr_switch_operation),
         random_sample,
     )
 

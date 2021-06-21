@@ -43,7 +43,7 @@ def create_equally_distributed_natural_dataset(
     """
 
     create_equally_distributed_dataset(
-        path_dataset, path_equally_distributed_dataset, limit, nbr_instances
+        path_dataset, path_equally_distributed_dataset, limit, int(nbr_instances)
     )
 
 
