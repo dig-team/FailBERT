@@ -32,7 +32,7 @@ python run_natural_parity_experiment.py
 
 #### Create Dataset
 ```bash
-python run_create_natural_dyck_2_dataset.py  create-natural-dyck-2-dataset  --path_dyck_2_dataset data/dyck_2/dyck_2_test_10.txt --path_natural_dyck_2_dataset data/natural_dyck_2/natural_dyck_2_test_10.csv
+python run_create_natural_dyck_2_dataset.py  create-natural-dyck-2-dataset  --path_dyck_2_dataset data/dyck_2/dyck_2_test_1.txt --path_natural_dyck_2_dataset data/natural_dyck_2/natural_dyck_2_test_1.csv
 ```
 
 #### Training a New Model or Download the Pretrained Model
