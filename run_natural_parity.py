@@ -92,7 +92,7 @@ def download_pretrained_model(url: str, file_name: str):
 @click.command()
 @click.option(
     "--path_test",
-    default="data/natural_parity/natural_parity_test.csv",
+    default="data/natural_parity/test_1.csv",
 )
 @click.option("--passages_column", default="modified_sentence")
 @click.option("--labels_column", default="label")
