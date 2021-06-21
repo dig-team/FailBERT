@@ -43,9 +43,7 @@ def eval_model(
     :rtype: Tuple[float, float, float, float]
     """
 
-    best_model = torch.load(path_model)
-
-    best_model.to(device)
+    best_model = torch.load(path_model, map_location=torch.device(device))
 
     test_dataset = CustomDataset(path_test, passages_column, labels_column)
     test_dataloader = DataLoader(test_dataset, batch_size=32)
