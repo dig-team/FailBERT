@@ -84,5 +84,5 @@ def run_experiment(device: str) -> None:
 
 
 if __name__ == "__main__":
-    DEVICE = "cuda"  # or cuda
+    DEVICE = "cpu"  # or cuda
     run_experiment(DEVICE)
