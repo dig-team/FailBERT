@@ -2,7 +2,11 @@
 
 # FailBERT
 
-Dyck and Parity were proved theoretically that a transformer architecture could not model them. These limitations can be a drawback when applying transformers-based models to specific natural language tasks involving reasoning capabilities. We designed two different natural datasets to simulate the Dyck-2 and the Parity tasks.
+Transformers have achieved impressive performance in a wide range of NLP tasks. Yet, it has been [proven](https://direct.mit.edu/tacl/article/doi/10.1162/tacl_a_00306/43545/Theoretical-Limitations-of-Self-Attention-in) that transformers cannot model two types of languages: the Dyck language (which consists of bracketed expressions) and the Parity language (which consists of sequences of 0's and 1's with an even number of 1's). In our work, we show that this limitation can impact the performance of transformers on reasoning in natural language. We designed two different natural datasets to simulate the Dyck and the Parity tasks.
+
+> Chadi Helwe, Chloé Clavel, Fabian M. Suchanek:  
+> [	“Reasoning with Transformer-based Models: Deep Learning, but Shallow Reasoning”](https://suchanek.name/work/publications/akbc-2021-reasoning.pdf)  
+> Automated Knowledge Base Construction (AKBC), 2021
 
 ## Installation
 
